@@ -11,6 +11,10 @@
   "author": "Nishant George Agrwal",
   "license": "ISC",
   "devDependencies": {
+    "@types/torrent-stream": "0.0.5",
     "typescript": "^2.3.4"
+  },
+  "dependencies": {
+    "torrent-stream": "^1.0.3"
   }
 }
