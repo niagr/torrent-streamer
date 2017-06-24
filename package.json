@@ -1,0 +1,16 @@
+{
+  "name": "torrent-streamer",
+  "version": "1.0.0",
+  "description": "An app to stream torrents",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p .",
+    "start": "node ./"
+  },
+  "author": "Nishant George Agrwal",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^2.3.4"
+  }
+}
