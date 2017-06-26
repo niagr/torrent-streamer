@@ -39,6 +39,7 @@ var fs = require("fs");
 var path = require("path");
 var os = require("os");
 var torrentStream = require("torrent-stream");
+var ui_1 = require("./ui/ui");
 function openFileAsync(path) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
@@ -46,23 +47,58 @@ function openFileAsync(path) {
         });
     });
 }
+function statAsync(path) {
+    return new Promise(function (resolve, reject) { return fs.stat(path, function (err, stats) { return err ? reject(err) : resolve(stats); }); });
+}
 function main() {
     var _this = this;
+    ui_1.default.init();
     var magnetLink = "magnet:?xt=urn:btih:A0DF264C995A009B422E61D3EBFAB9FFFBF12AD1&dn=Batman%20v%20Superman%3A%20Dawn%20of%20Justice%20%282016%29%20%5B720p%20%5D&tr=%2audp%3a%2f%2fopen.demonii.com%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.openbittorrent.com%3a80%2fannounce&tr=udp%3a%2f%2fglotorrents.pw%3a6969%2fannounce&tr=udp%3a%2f%2fp4p.arenabg.com%3a1337&tr=udp%3a%2f%2ftracker.leechers-paradise.org%3a6969&tr=udp%3a%2f%2ftracker.coppersurfer.tk%3a6969&tr=udp%3a%2f%2ftorrent.gresille.org%3a80%2fannounce&tr=udp%3a%2f%2ftracker.opentrackr.org%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.internetwarriors.net%3a1337&tr=udp%3a%2f%2fexodus.desync.com%3a6969&tr=udp%3a%2f%2ftracker.coppersurfer.tk%3a6969&tr=udp%3a%2f%2ftracker.coppersurfer.tk%3a6969&tr=udp%3a%2f%2ftracker.internetwarriors.net%3a1337&tr=udp%3a%2f%2ftracker.internetwarriors.net%3a1337&tr=udp%3a%2f%2ftracker.leechers-paradise.org%3a6969&tr=udp%3a%2f%2ftracker.openbittorrent.com%3a80&tr=udp%3a%2f%2ftracker.openbittorrent.com%3a80&tr=udp%3a%2f%2f9.rarbg.me%3a2710%2fannounce";
     var engine = torrentStream(magnetLink);
     engine.on("ready", function () { return __awaiter(_this, void 0, void 0, function () {
-        var videoFile, fileStream, outFileWriteStream;
+        var _this = this;
+        var videoFile, fileStream, outFilePath, outFileWriteStream, downloaded;
         return __generator(this, function (_a) {
             engine.files.forEach(function (file) { return console.log("FILE: " + file.name); });
             videoFile = engine.files[1];
             fileStream = videoFile.createReadStream();
-            outFileWriteStream = fs.createWriteStream(path.join(os.homedir(), "downloading.mp4"), {
-                flags: "w"
-            });
-            outFileWriteStream.on("open", function () {
-                fileStream.pipe(outFileWriteStream);
-                fileStream.on("data", function () { return console.log("GOT DATA"); });
-            });
+            outFilePath = path.join(os.homedir(), "bbb.mp4") // path.join(os.homedir(), videoFile.name)
+            ;
+            outFileWriteStream = fs.createWriteStream(outFilePath);
+            console.log("VIDEO FILE LENGTH: " + videoFile.length);
+            downloaded = 0;
+            outFileWriteStream.on("open", function () { return __awaiter(_this, void 0, void 0, function () {
+                var _this = this;
+                return __generator(this, function (_a) {
+                    fileStream.pipe(outFileWriteStream);
+                    fileStream.on("data", function logOnce(c) {
+                        console.log("GOT DATA");
+                        fileStream.removeListener("data", logOnce);
+                    });
+                    fileStream.on("data", function (chunk) {
+                        // console.log("CHUNK:", chunk)
+                        console.log("SIZE:", chunk.length);
+                        downloaded += chunk.length;
+                        console.log("DOWNLOADED:", downloaded);
+                    });
+                    engine.on("download", function (pieceIndex) { return __awaiter(_this, void 0, void 0, function () {
+                        var outFileStats;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    console.log("Downloaded piece " + pieceIndex);
+                                    return [4 /*yield*/, statAsync(outFilePath)
+                                        // console.log(`SIZE: ${outFileStats.size}`)
+                                    ];
+                                case 1:
+                                    outFileStats = _a.sent();
+                                    return [2 /*return*/];
+                            }
+                        });
+                    }); });
+                    return [2 /*return*/];
+                });
+            }); });
             return [2 /*return*/];
         });
     }); });
