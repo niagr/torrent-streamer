@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc -p . && webpack",
+    "build": "webpack",
     "start": "electron ./"
   },
   "author": "Nishant George Agrwal",
@@ -15,7 +15,7 @@
     "@types/react": "^15.0.31",
     "@types/react-dom": "^15.5.1",
     "@types/torrent-stream": "0.0.5",
-    "copy-webpack-plugin": "^4.0.1",
+    "awesome-typescript-loader": "^3.2.1",
     "electron": "^1.6.11",
     "html-webpack-plugin": "^2.29.0",
     "typescript": "^2.3.4",

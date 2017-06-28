@@ -11,8 +11,8 @@ module.exports = {
     __filename: false
   },
   entry: {
-      "renderer": './src/js/renderer/home.js',
-      "main": './src/js/electron-main/app.js'
+      "renderer": './src/ts/renderer/home.tsx',
+      "main": './src/ts/electron-main/app.ts'
   },
   output: {
       path: path.join(__dirname, "dist"),
@@ -20,20 +20,17 @@ module.exports = {
   },
   module: {
     loaders: [
-    //   {
-    //     test: /.jsx?$/,
-    //     loader: 'babel-loader',
-    //     exclude: /node_modules/,
-    //     query: {
-    //       presets: ['es2015', 'react']
-    //     }
-    //   }
+      {
+        test: /\.tsx?$/,
+        loader: 'awesome-typescript-loader'
+      }
     ]
   },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx']
+  },
+  devtool: 'source-map',
   plugins: [
-    //   new CopyWebpackPlugin([
-    //       {from: "./src/js/electron-main"}
-    //   ]),
       new HtmlWebpackPlugin({
           template: "./src/html/index.html",
           chunks: ['renderer']
