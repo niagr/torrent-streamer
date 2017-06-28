@@ -11,8 +11,8 @@ module.exports = {
     __filename: false
   },
   entry: {
-      "renderer": './src/ts/renderer/home.tsx',
-      "main": './src/ts/electron-main/app.ts'
+      "renderer": './src/renderer/home.tsx',
+      "main": './src/electron-main/app.ts'
   },
   output: {
       path: path.join(__dirname, "dist"),
@@ -32,7 +32,7 @@ module.exports = {
   devtool: 'source-map',
   plugins: [
       new HtmlWebpackPlugin({
-          template: "./src/html/index.html",
+          template: "./src/renderer/index.html",
           chunks: ['renderer']
       })
 
