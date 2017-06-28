@@ -11,7 +11,7 @@ module.exports = {
     __filename: false
   },
   entry: {
-      "renderer": './src/renderer/home.tsx',
+      "renderer": './src/renderer/index.tsx',
       "main": './src/electron-main/app.ts'
   },
   output: {
