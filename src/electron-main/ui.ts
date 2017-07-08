@@ -10,7 +10,6 @@ namespace ui {
         app.on("ready", () => {
             mainWindow = new BrowserWindow()
             mainWindow.show()
-            const indexPageUrl = path.join(__dirname, "../../html", "home.html")
             mainWindow.loadURL(`file://${__dirname}/index.html`)
         })
     }
