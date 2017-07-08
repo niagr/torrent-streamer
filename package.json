@@ -19,11 +19,11 @@
     "electron": "^1.6.11",
     "html-webpack-plugin": "^2.29.0",
     "typescript": "^2.3.4",
-    "webpack": "^3.0.0"
-  },
-  "dependencies": {
+    "webpack": "^3.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "torrent-stream": "^1.0.3"
+  },
+  "dependencies": {
   }
 }

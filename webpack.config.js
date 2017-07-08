@@ -14,8 +14,9 @@ module.exports = {
       "main": './src/electron-main/app.ts'
   },
   output: {
-      path: path.join(__dirname, "dist"),
-      filename: "[name].bundle.js"
+      path: path.join(__dirname, "build"),
+      filename: "[name].bundle.js",
+      devtoolModuleFilenameTemplate: '[absolute-resource-path]'
   },
   module: {
     loaders: [
