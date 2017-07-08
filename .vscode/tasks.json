@@ -22,7 +22,8 @@
         {
             "taskName": "build",
             "args": ["run", "build"],
-            "isBuildCommand": true
+            "isBuildCommand": true,
+            "showOutput": "never"
         }
     ]
 }
