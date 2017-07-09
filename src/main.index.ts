@@ -4,17 +4,20 @@ import * as os from "os"
 
 import * as torrentStream  from "torrent-stream"
 
-import ui from "./ui"
+import * as ui from "./ui"
 import { statAsync } from "./util"
 import { createTorrentController } from "./torrent-controller"
 
-export function main() {
+export async function main() {
 
-    ui.init()
+    ui.initUI()
 
-    const magnetLink = "magnet:?xt=urn:btih:FB9BE2362BBF6BDE95F64A5203421E920FA380A5&dn=Enemy+at+the+Gates+%282001%29+%5B720p%5D+%5BYTS.AG%5D&tr=udp%3A%2F%2Fglotorrents.pw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Fp4p.arenabg.ch%3A1337&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337"
+    // const magnetLink = "magnet:?xt=urn:btih:FB9BE2362BBF6BDE95F64A5203421E920FA380A5&dn=Enemy+at+the+Gates+%282001%29+%5B720p%5D+%5BYTS.AG%5D&tr=udp%3A%2F%2Fglotorrents.pw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Fp4p.arenabg.ch%3A1337&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337"
 
-    const torrentController = createTorrentController(magnetLink)
+    // const torrentController = await createTorrentController(magnetLink)
+    // const files = torrentController.getFiles()
+    // // const stream = torrentController.startDownloadingFile('')
+    // console.log("FILES:", files)
 
 
     // const engine = torrentStream(magnetLink)

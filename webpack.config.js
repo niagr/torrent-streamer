@@ -10,8 +10,8 @@ module.exports = {
     __filename: false
   },
   entry: {
-      "renderer": './src/renderer/index.tsx',
-      "main": './src/electron-main/app.ts'
+      "renderer": './src/renderer.index.tsx',
+      "main": './src/main.index.ts'
   },
   output: {
       path: path.join(__dirname, "build"),
@@ -32,7 +32,7 @@ module.exports = {
   devtool: 'source-map',
   plugins: [
       new HtmlWebpackPlugin({
-          template: "./src/renderer/index.html",
+          template: "./src/index.html",
           chunks: ['renderer']
       })
 
