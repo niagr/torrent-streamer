@@ -5,7 +5,6 @@ import * as os from "os"
 import * as torrentStream  from "torrent-stream"
 
 import * as ui from "./ui"
-import { statAsync } from "./util"
 import { createTorrentController } from "./torrent-controller"
 
 export async function main() {

@@ -14,3 +14,8 @@ declare namespace TorrentStream {
         torrent: TorrentMetadata;
     }
 }
+
+declare module "*.scss" {
+    const styles: any;
+    export default styles;
+}

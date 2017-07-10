@@ -2,7 +2,7 @@ import * as fs from 'fs'
 
 import * as torrentStream from 'torrent-stream'
 
-import {statAsync} from './util'
+import * as util from './util'
 
 const videoFileTypes = ['avi', 'mp4', 'mkv']
 
@@ -53,7 +53,7 @@ class TorrentController {
             const tmpFilePath = `/tmp/torrent-stream/${this.torrentStreamEngine.infoHash}/${file.path}`
             let tmpFileSize = 0
             try {
-                const stats = await statAsync(tmpFilePath)
+                const stats = await util.fs.statAsync(tmpFilePath)
                 tmpFileSize = stats.size
             } catch (e) {}
             this.fileProgress[file.path] = {
@@ -90,12 +90,20 @@ class TorrentController {
      * @param fileTorrentPath Path of file relative to torrent root
      * @return A readable stream to the downloading file
      */
-    public startDownloadingFile (fileTorrentPath: string): fs.ReadStream {
+    private startDownloadingFile (fileTorrentPath: string): fs.ReadStream {
         this.checkFileInTorrent(fileTorrentPath)
         const file = this.files.find(file => file.path === fileTorrentPath) ! // checkFileInTorrent() verified assertion holds
         const fileProgress = this.fileProgress[fileTorrentPath]
         fileProgress.fileStream =  file.createReadStream() as fs.ReadStream
         return fileProgress.fileStream
+    }
+
+    public async startDownloadingFileTo(fileTorrentPath: string, destinationFilePath: string): Promise<fs.ReadStream> {
+        const downloadReadStream = this.startDownloadingFile(fileTorrentPath)
+        const destWriteStream = fs.createWriteStream(destinationFilePath)
+        downloadReadStream.pipe(destWriteStream)
+        const destReadStream = fs.createReadStream(destinationFilePath)
+        return destReadStream
     }
 
     /**
