@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "start": "electron ./"
+    "start": "electron ./build/main.bundle.js"
   },
   "author": "Nishant George Agrwal",
   "license": "ISC",
@@ -19,6 +19,7 @@
     "css-loader": "^0.28.4",
     "electron": "^1.6.11",
     "html-webpack-plugin": "^2.29.0",
+    "node-sass": "^4.5.3",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "sass-loader": "^6.0.6",

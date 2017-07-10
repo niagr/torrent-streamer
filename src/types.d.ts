@@ -17,5 +17,5 @@ declare namespace TorrentStream {
 
 declare module "*.scss" {
     const styles: any;
-    export default styles;
+    export = styles;
 }
