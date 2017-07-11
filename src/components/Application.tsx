@@ -1,13 +1,19 @@
 import * as React from 'react'
-// import * as ReactDOM from 'react-dom'
 
 import * as styls from './Application.scss'
 
-export default class Application extends React.Component {
+interface ApplicationPropTypes {
+    files: string[];
+}
+
+export default class Application extends React.Component<ApplicationPropTypes> {
 
     render () {
         return (
-            <div className={styls.foo}></div>
+            <ul>
+                {this.props.files.map(f => <li>{f}</li>)}
+                <li>yoma</li>
+            </ul>
         );
     }
 
